@@ -3,7 +3,12 @@
     <UHeader
       title="Rental"
       :toggle="false"
-      :ui="{ left: 'justify-between w-full', container: 'gap-0', right: 'hidden' }"
+      :ui="{
+        root: 'fixed bg-transparent w-full',
+        left: 'justify-between w-full',
+        container: 'gap-0',
+        right: 'hidden',
+      }"
     >
       <template #left>
         <NuxtLink to="/">
@@ -15,9 +20,7 @@
     </UHeader>
 
     <UMain>
-      <UContainer>
-        <slot />
-      </UContainer>
+      <slot />
     </UMain>
 
     <UFooter>

@@ -39,7 +39,7 @@ const { isMobile } = useScreen()
 const router = useRouter()
 const route = useRoute()
 
-const tabs = ref<TabsItem[]>([
+const tabs = computed<TabsItem[]>(() => [
   {
     label: isMobile.value ? '' : 'Главная',
     icon: 'i-lucide-home',

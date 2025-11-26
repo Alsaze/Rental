@@ -2,13 +2,15 @@
   <UPageSection
     title="Что мы предлагаем"
     description="Полный спектр консьерж-услуг для работы с недвижимостью и автомобилями"
+    :ui="{ container: '!p-0' }"
   >
     <template #body>
       <div class="services">
-        <div
+        <NuxtLink
           v-for="service in services"
           :key="service.name"
           class="service"
+          :to="service.name"
         >
           <img :src="service.img" :alt="`Service Image ${service.name}`">
 
@@ -32,7 +34,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </template>
   </UPageSection>
@@ -103,8 +105,6 @@ const services = [
   cursor: pointer;
   width: 100%;
   height: 100%;
-  max-width: 600px;
-  max-height: 500px;
   position: relative;
   border-radius: 24px;
   overflow: hidden;
@@ -122,9 +122,9 @@ const services = [
   }
 
   &__title {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 600;
-    margin: 1rem;
+    margin: 16px;
   }
 
   &__items {

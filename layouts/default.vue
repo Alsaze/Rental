@@ -5,7 +5,7 @@
       :toggle="false"
       :ui="{
         root: 'fixed bg-transparent w-full',
-        left: 'justify-between w-full',
+        left: 'relative flex items-center w-full',
         container: 'gap-0',
         right: 'hidden',
       }"
@@ -14,8 +14,14 @@
         <NuxtLink to="/">
           Rental
         </NuxtLink>
-        <UTabs v-model="activeTab" :content="false" :items="tabs" />
-        <UColorModeButton />
+
+        <div class="absolute left-1/2 transform -translate-x-1/2">
+          <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
+        </div>
+
+        <div class="ml-auto">
+          <UButton href="#benefits" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
+        </div>
       </template>
     </UHeader>
 
@@ -24,7 +30,7 @@
     </UMain>
 
     <UFooter>
-      <div class="flex flex-col md:flex-row justify-between items-center w-full text-sm opacity-70">
+      <div class="flex flex-col md:flex-row items-center text-sm opacity-70">
         <div>
           © {{ new Date().getFullYear() }} Rental. Все права защищены.
         </div>

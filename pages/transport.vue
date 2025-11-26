@@ -1,5 +1,4 @@
 <template>
-  transport
 </template>
 
 <script setup lang="ts">

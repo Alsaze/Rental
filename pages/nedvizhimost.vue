@@ -1,5 +1,4 @@
 <template>
-  nedvizhimost
 </template>
 
 <script setup lang="ts">

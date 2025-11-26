@@ -7,8 +7,10 @@
       class="index-page__hero"
     />
 
-    <UContainer>
+    <UContainer class="flex flex-col gap-32 my-32">
       <Services />
+
+      <Benefits />
     </UContainer>
   </div>
 </template>

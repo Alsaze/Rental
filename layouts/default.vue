@@ -1,9 +1,15 @@
 <template>
   <div class="layout">
-    <UHeader title="Rental">
-      <UTabs v-model="activeTab" :content="false" :items="tabs" />
-
-      <template #right>
+    <UHeader
+      title="Rental"
+      :toggle="false"
+      :ui="{ left: 'justify-between w-full', container: 'gap-0', right: 'hidden' }"
+    >
+      <template #left>
+        <NuxtLink to="/">
+          Rental
+        </NuxtLink>
+        <UTabs v-model="activeTab" :content="false" :items="tabs" />
         <UColorModeButton />
       </template>
     </UHeader>
@@ -14,40 +20,50 @@
       </UContainer>
     </UMain>
 
-    <UFooter />
+    <UFooter>
+      <div class="flex flex-col md:flex-row justify-between items-center w-full text-sm opacity-70">
+        <div>
+          © {{ new Date().getFullYear() }} Rental. Все права защищены.
+        </div>
+      </div>
+    </UFooter>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui'
+import useScreen from '~/composables/useScreen'
+
+const { isMobile } = useScreen()
 
 const router = useRouter()
 const route = useRoute()
 
 const tabs = ref<TabsItem[]>([
   {
-    label: 'Главная',
+    label: isMobile.value ? '' : 'Главная',
     icon: 'i-lucide-home',
+    value: 'index',
     route: '/',
   },
   {
-    label: 'Недвижимость',
+    label: isMobile.value ? '' : 'Недвижимость',
     icon: 'i-lucide-building-2',
+    value: 'nedvizhimost',
     route: '/nedvizhimost',
   },
   {
-    label: 'Авто',
+    label: isMobile.value ? '' : 'Авто',
     icon: 'i-lucide-car',
+    value: 'transport',
     route: '/transport',
   },
 ])
 
-const activeTab = ref(tabs.value.findIndex(tab => route.path.startsWith(tab.route)))
+const activeTab = ref(route.path.split('/')[1])
 
 watch(() => activeTab.value, () => {
-  router.push(tabs.value[activeTab?.value]?.route)
+  const tab = tabs.value.find(tab => tab.value === activeTab.value)
+  router.push(tab.route)
 })
 </script>
-
-<style lang="scss">
-</style>

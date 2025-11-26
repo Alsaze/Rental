@@ -1,0 +1,20 @@
+{
+  "colors": {
+    "black": "черный",
+    "beige": "бежевый",
+    "grey": "серый",
+    "grey-black": "серо-черный"
+  },
+  "materials": {
+    "cotton": "хлопок",
+    "cotton-polyester": "хлопок-полиэстер"
+  },
+  "checkoutSteps": {
+    "delivery": "Выберите адрес получения заказа",
+    "mobileDelivery": "доставка",
+    "contacts": "Введите данные получателя",
+    "mobileContacts": "контакты",
+    "summary": "Подтвердите заказ",
+    "mobileSummary": "заказ"
+  }
+}

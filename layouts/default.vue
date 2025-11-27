@@ -41,9 +41,9 @@
 
 <script setup lang="ts">
 import type { TabsItem } from '@nuxt/ui'
-import useScreen from '~/composables/useScreen'
+import { useMediaQuery } from '@vueuse/core'
 
-const { isMobile } = useScreen()
+const isMobile = useMediaQuery('(max-width: 1280px)')
 
 const router = useRouter()
 const route = useRoute()
@@ -52,7 +52,7 @@ const tabs = computed<TabsItem[]>(() => [
   {
     label: isMobile.value ? '' : 'Главная',
     icon: 'i-lucide-home',
-    value: 'index',
+    value: '/',
     route: '/',
   },
   {
@@ -69,10 +69,20 @@ const tabs = computed<TabsItem[]>(() => [
   },
 ])
 
-const activeTab = ref(route.path.split('/')[1])
+const activeTab = ref(route.path.split('/')[1] || '/')
 
 watch(() => activeTab.value, () => {
   const tab = tabs.value.find(tab => tab.value === activeTab.value)
   router.push(tab.route)
+})
+
+watch(() => route.path, () => {
+  const routerPath = route.path.split('/')[1]
+
+  if (routerPath === activeTab.value) {
+    return
+  }
+
+  activeTab.value = routerPath
 })
 </script>

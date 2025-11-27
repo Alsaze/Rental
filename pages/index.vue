@@ -11,6 +11,8 @@
       <Services />
 
       <Benefits />
+
+      <HowWorks />
     </UContainer>
   </div>
 </template>

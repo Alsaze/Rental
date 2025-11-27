@@ -21,6 +21,9 @@ export default defineNuxtConfig({
     ],
   ],
   css: ['~/assets/css/main.css', '~/assets/scss/main.scss'],
+  build: {
+    transpile: ['gsap'],
+  },
   i18n: {
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },

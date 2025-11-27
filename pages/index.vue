@@ -3,9 +3,26 @@
     <UPageHero
       title="Консьерж-сервис премиум класса"
       :description="`Недвижимость и авто под ключ\nМы берем на себя все заботы по поиску, проверке и оформлению недвижимости и автомобилей. Экономьте время — доверьтесь профессионалам.`"
-      :links="links"
       class="index-page__hero"
-    />
+    >
+      <template #footer>
+        <div class="flex gap-2 place-content-center">
+          <UButton
+            size="xl"
+            label="Узанть больше"
+            href="#services"
+          />
+
+          <UButton
+            size="xl"
+            label="Почему выбирают нас"
+            href="#benefits"
+            color="neutral"
+            variant="subtle"
+          />
+        </div>
+      </template>
+    </UPageHero>
 
     <UContainer class="flex flex-col gap-32 my-32">
       <Services />
@@ -19,21 +36,6 @@
 
 <script setup lang="ts">
 import Services from '~/components/Services.vue'
-
-const links = computed(() => [
-  {
-    label: 'Начать работу',
-    to: '/docs/getting-started',
-    icon: 'i-lucide-square-play',
-  },
-  {
-    label: 'Узнать больше',
-    to: '/docs/getting-started/theme/design-system',
-    color: 'neutral',
-    variant: 'subtle',
-    trailingIcon: 'i-lucide-arrow-right',
-  },
-])
 </script>
 
 <style lang="scss">

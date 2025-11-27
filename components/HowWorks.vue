@@ -6,25 +6,22 @@
     :ui="{ container: '!p-0' }"
   >
     <template #body>
-      <div class="how-works">
+      <div ref="howWorksRef" class="how-works">
         <UCard
           v-for="item in items"
           :key="item.title"
           class="how-work"
-          :ui="{ body: 'flex flex-col gap-4 h-[350px] !pb-15' }"
+          :ui="cardUi"
         >
           <div class="how-work__number">
             {{ item.number }}
           </div>
-
           <div class="how-work__icon">
             {{ item.icon }}
           </div>
-
           <div class="how-work__title">
             {{ item.title }}
           </div>
-
           <div class="how-work__description">
             {{ item.description }}
           </div>
@@ -35,6 +32,50 @@
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core'
+import gsap from 'gsap'
+import { onMounted, onUnmounted, ref } from 'vue'
+
+const isMobile = useMediaQuery('(max-width: 1280px)')
+const cardUi = computed(() => {
+  return isMobile.value
+    ? { body: 'flex flex-col gap-2 h-[270px] !pb-5' }
+    : { body: 'flex flex-col gap-4 h-[350px] !pb-15' }
+})
+
+const howWorksRef = ref()
+let ctx
+
+onMounted(() => {
+  desktopAnimation()
+})
+
+function desktopAnimation() {
+  ctx = gsap.context((self) => {
+    const boxes = self.selector('.how-work')
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: howWorksRef.value,
+        start: 'top 50%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+
+    tl.from(boxes, {
+      x: -80,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      stagger: 0.25,
+    })
+  }, howWorksRef.value)
+}
+
+onUnmounted(() => {
+  ctx.revert()
+})
+
 const items = [
   {
     icon: '💬',
@@ -72,7 +113,7 @@ const items = [
 
   @include mobile {
     gap: 10px;
-    grid-template-columns: repeat(2, minmax(150px, 350px));
+    grid-template-columns: repeat(1, minmax(150px, 350px));
   }
 }
 

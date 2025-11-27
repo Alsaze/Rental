@@ -6,7 +6,7 @@
     :ui="{ container: '!p-0' }"
   >
     <template #body>
-      <div class="benefits">
+      <div ref="benefitsRef" class="benefits">
         <div
           v-for="benefit in benefits"
           :key="benefit.title"
@@ -30,6 +30,41 @@
 </template>
 
 <script setup lang="ts">
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import { onMounted, onUnmounted, ref } from 'vue'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const benefitsRef = ref()
+let benefitsCtx
+
+onMounted(() => {
+  desktopAnimation()
+})
+
+function desktopAnimation() {
+  benefitsCtx = gsap.context((self) => {
+    const boxes = self.selector('.benefit')
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: benefitsRef.value,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+
+    tl.from(boxes, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      stagger: 0.25,
+    })
+  }, benefitsRef.value)
+}
+
 const benefits = [
   {
     icon: '⏱️',
@@ -62,6 +97,10 @@ const benefits = [
     description: 'Более 10 лет на рынке консьерж-услуг',
   },
 ]
+
+onUnmounted(() => {
+  benefitsCtx?.revert()
+})
 </script>
 
 <style lang="scss">

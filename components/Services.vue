@@ -1,11 +1,12 @@
 <template>
   <UPageSection
+    id="services"
     title="Что мы предлагаем"
     description="Полный спектр консьерж-услуг для работы с недвижимостью и автомобилями"
     :ui="{ container: '!p-0' }"
   >
     <template #body>
-      <div class="services">
+      <div ref="servicesRef" class="services">
         <NuxtLink
           v-for="service in services"
           :key="service.name"
@@ -41,6 +42,52 @@
 </template>
 
 <script setup lang="ts">
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import { onMounted, onUnmounted, ref } from 'vue'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const servicesRef = ref()
+let servicesCtx
+
+onMounted(() => {
+  servicesAnimation()
+})
+
+function servicesAnimation() {
+  servicesCtx = gsap.context((self) => {
+    const cards = self.selector('.service')
+
+    cards.forEach((card) => {
+      gsap.from(card, {
+        y: 80,
+        rotateY: 15,
+        opacity: 0,
+        duration: 1,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 70%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+    })
+
+    cards.forEach((card) => {
+      const hover = gsap.to(card, {
+        scale: 1.01,
+        duration: 0.3,
+        paused: true,
+        ease: 'power2.out',
+      })
+
+      card.addEventListener('mouseenter', () => hover.play())
+      card.addEventListener('mouseleave', () => hover.reverse())
+    })
+  }, servicesRef.value)
+}
+
 const services = [
   {
     name: 'nedvizhimost',
@@ -87,6 +134,10 @@ const services = [
     ],
   },
 ]
+
+onUnmounted(() => {
+  servicesCtx?.revert()
+})
 </script>
 
 <style lang="scss">
@@ -109,11 +160,6 @@ const services = [
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-  transition: 0.15s ease-out;
-
-  &:hover {
-    transform: scale(1.01);
-  }
 
   img {
     width: 100%;

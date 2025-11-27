@@ -24,18 +24,19 @@
       </template>
     </UPageHero>
 
-    <UContainer class="flex flex-col gap-32 my-32">
+    <UContainer class="flex flex-col gap-32 mt-32">
       <Services />
 
       <Benefits />
 
       <HowWorks />
+
+      <Contacts />
     </UContainer>
   </div>
 </template>
 
 <script setup lang="ts">
-import Services from '~/components/Services.vue'
 </script>
 
 <style lang="scss">

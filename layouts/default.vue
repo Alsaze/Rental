@@ -20,7 +20,7 @@
         </div>
 
         <div class="ml-auto">
-          <UButton href="#benefits" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
+          <UButton href="#contacts" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
         </div>
       </template>
     </UHeader>

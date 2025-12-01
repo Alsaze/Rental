@@ -27,7 +27,7 @@
     <UContainer class="flex flex-col gap-32 mt-32">
       <MainServices :services="services" />
 
-      <MainCarusel />
+      <MainCarusel :preview-items="previewItems" />
 
       <Contacts />
     </UContainer>
@@ -81,6 +81,9 @@ const services = [
     ],
   },
 ]
+
+const { cartByCategory } = useMock()
+const previewItems = computed(() => cartByCategory('transport'))
 </script>
 
 <style lang="scss">

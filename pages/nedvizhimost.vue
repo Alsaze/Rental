@@ -27,7 +27,7 @@
     <UContainer class="flex flex-col gap-32 mt-32">
       <MainServices :services="services" />
 
-      <MainCarusel />
+      <MainCarusel :preview-items="previewItems" />
 
       <Contacts />
     </UContainer>
@@ -83,6 +83,41 @@ const services = [
       { title: 'Инвестиционные проекты' },
       { title: 'Due diligence' },
     ],
+  },
+]
+
+const previewItems = [
+  {
+    id: 13242314,
+    img: 'https://picsum.photos/468/468?random=1',
+  },
+  {
+    id: 123321,
+    img: 'https://picsum.photos/468/468?random=2',
+  },
+  {
+    id: 7654567,
+    img: 'https://picsum.photos/468/468?random=3',
+  },
+  {
+    id: 3203030,
+    img: 'https://picsum.photos/468/468?random=4',
+  },
+  {
+    id: 1818822,
+    img: 'https://picsum.photos/468/468?random=5',
+  },
+  {
+    id: 12355432,
+    img: 'https://picsum.photos/468/468?random=6',
+  },
+  {
+    id: 3495823,
+    img: 'https://picsum.photos/468/468?random=7',
+  },
+  {
+    id: 1123,
+    img: 'https://picsum.photos/468/468?random=8',
   },
 ]
 </script>

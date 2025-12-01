@@ -6,7 +6,7 @@
       class="index-page__hero"
     >
       <template #footer>
-        <div class="flex gap-2 place-content-center">
+        <div class="flex gap-2 place-content-center h-[48px]">
           <UButton
             size="xl"
             label="Узанть больше"
@@ -35,9 +35,6 @@
     </UContainer>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>
 
 <style lang="scss">
 .index-page {

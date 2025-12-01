@@ -1,5 +1,11 @@
 <template>
-  <UContainer>
+  <!--  Mobile -->
+  <div v-if="isMobile" class="post-page">
+    <Gallery :preview-image="cart?.previewImage" :images="cart?.images" />
+  </div>
+
+  <!--  Desktop -->
+  <UContainer v-else>
     <div class="post-page">
       <h1>{{ cart?.title }}</h1>
 
@@ -14,12 +20,18 @@
 </template>
 
 <script setup lang="ts">
-import Gallery from '~/pages/post/Gallery.vue'
+import { useMediaQuery } from '@vueuse/core'
+import Gallery from '~/components/Gallery.vue'
 
+const isMobile = useMediaQuery('(max-width: 1024px)')
 const route = useRoute()
 
 const { cartById } = useMock()
 const cart = cartById(route.params.id)
+
+definePageMeta({
+  layout: 'cart',
+})
 </script>
 
 <style lang="scss">
@@ -28,5 +40,10 @@ const cart = cartById(route.params.id)
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @include mobile {
+    margin-top: 0;
+    overflow: hidden;
+  }
 }
 </style>

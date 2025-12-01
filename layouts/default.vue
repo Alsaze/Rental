@@ -69,15 +69,15 @@ const tabs = computed<TabsItem[]>(() => [
   },
 ])
 
-const activeTab = ref(route.path.split('/')[1] || '/')
+const activeTab = ref(route?.path.split('/')[1] || '/')
 
 watch(() => activeTab.value, () => {
   const tab = tabs.value.find(tab => tab.value === activeTab.value)
-  router.push(tab.route)
+  router.push(tab?.route)
 })
 
-watch(() => route.path, () => {
-  const routerPath = route.path.split('/')[1]
+watch(() => route?.path, () => {
+  const routerPath = route?.path?.split('/')[1]
 
   if (routerPath === activeTab.value) {
     return

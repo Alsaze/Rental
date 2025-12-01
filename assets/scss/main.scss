@@ -36,13 +36,12 @@ html {
 //swiper
 .swiper {
   width: 100%;
-  height: calc(100dvh - 54px);
+  height: calc(100dvh);
 }
 
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #444;
 
   /* Center slide text vertically */
   display: flex;
@@ -53,7 +52,7 @@ html {
 .swiper-slide img {
   display: block;
   width: 100%;
-  height: calc(100dvh - 54px);
+  height: calc(100dvh);
   object-fit: cover;
 }
 

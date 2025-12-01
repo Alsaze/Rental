@@ -58,7 +58,7 @@ defineProps<{ services: Service[] }>()
 
   @include mobile {
     gap: 10px;
-    grid-template-columns: repeat(1, minmax(150px, 350px));
+    grid-template-columns: repeat(1, minmax(150px, 500px));
   }
 }
 

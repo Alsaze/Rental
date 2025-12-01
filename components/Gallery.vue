@@ -1,19 +1,35 @@
 <template>
-  <div class="gallery">
-    <div class="gallery__main">
+  <div v-if="isMobile" class="gallery-mobile">
+    <Swiper
+      :pagination="true"
+      :loop="true"
+      :modules="modules"
+      class="mySwiper gallery-mobile__swiper"
+    >
+      <SwiperSlide
+        v-for="image in smallImages"
+        :key="image?.src"
+      >
+        <img width="100%" :src="image?.src" :alt="image?.src">
+      </SwiperSlide>
+    </Swiper>
+  </div>
+
+  <div v-else class="gallery-desktop">
+    <div class="gallery-desktop__main">
       <img :src="previewImage?.src" :alt="previewImage?.src">
     </div>
 
-    <div class="gallery__side">
+    <div class="gallery-desktop__side">
       <div
         v-for="img in smallImages"
         :key="img?.src"
-        class="gallery__small"
+        class="gallery-desktop__small"
       >
         <img :src="img?.src" :alt="img?.src">
       </div>
 
-      <UButton size="xl" class="gallery__button">
+      <UButton size="xl" class="gallery-desktop__button">
         ⋮⋮ Показать все фото
       </UButton>
     </div>
@@ -21,13 +37,23 @@
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core'
+import { Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
+
 const props = defineProps<{ previewImage: { src }, images: { src }[] }>()
 
+const modules = [Pagination]
+
+const isMobile = useMediaQuery('(max-width: 1024px)')
 const smallImages = computed(() => props?.images?.slice(1, 5))
 </script>
 
 <style lang="scss">
-.gallery {
+//Desktop
+.gallery-desktop {
   position: relative;
   display: grid;
   grid-template-columns: 2fr 1fr;

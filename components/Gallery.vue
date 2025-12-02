@@ -43,7 +43,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const props = defineProps<{ previewImage: { src }, images: { src }[] }>()
+const props = defineProps<{
+  previewImage: { src: string }
+  images: { src: string }[]
+}>()
 
 const modules = [Pagination]
 
@@ -57,11 +60,11 @@ const smallImages = computed(() => props?.images?.slice(1, 5))
   position: relative;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 12px;
+  gap: 10px;
 
   &__main img {
     width: 100%;
-    height: 100%;
+    height: 500px;
     object-fit: cover;
     border-radius: 20px;
     cursor: pointer;
@@ -75,12 +78,12 @@ const smallImages = computed(() => props?.images?.slice(1, 5))
   &__side {
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 500px));
-    gap: 12px;
+    gap: 10px;
   }
 
   &__small img {
     width: 100%;
-    height: 100%;
+    height: 245px;
     object-fit: cover;
     border-radius: 12px;
     cursor: pointer;

@@ -43,61 +43,98 @@
         </div>
 
         <UCard variant="subtle" class="w-full" :ui="{ root: 'max-w-[500px]' }">
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              Как к вам обращаться
-              <UInput
-                placeholder="Имя"
-                size="xl"
-                class="w-full"
-              />
-            </div>
-
-            <div class="flex flex-col gap-2">
-              Телефон
-              <UInput
-                v-maska="'+7 (###) ###-##-##'"
-                placeholder="+7 (___) __-__-__"
-                size="xl"
-                class="w-full"
-              />
-            </div>
-
-            <div class="flex flex-col gap-2">
-              Что вас интересует?
-              <div>
-                <USelect
-                  :items="services"
-                  class="w-full"
+          <form @submit.prevent="onSubmit">
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                Как к вам обращаться
+                <UInput
+                  id="name"
+                  v-model="name"
+                  v-bind="nameAttrs"
+                  name="name"
+                  placeholder="Имя"
                   size="xl"
-                  placeholder="выберите услугу"
+                  class="w-full"
+                  autofocus
+                />
+
+                <div v-if="errors?.name" style="color: #ff6467">
+                  {{ errors?.name }}
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                Телефон
+                <UInput
+                  id="phone"
+                  v-model="phone"
+                  v-maska="'+7 (###) ###-##-##'"
+                  name="phone"
+                  v-bind="phoneAttrs"
+                  placeholder="+7 (___) __-__-__"
+                  size="xl"
+                  class="w-full"
+                />
+
+                <div v-if="errors?.phone" style="color: #ff6467">
+                  {{ errors?.phone }}
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                Что вас интересует?
+                <div>
+                  <USelect
+                    id="service"
+                    v-model="service"
+                    v-bind="serviceAttrs"
+                    name="service"
+                    :items="services"
+                    class="w-full"
+                    size="xl"
+                    placeholder="выберите услугу"
+                  />
+
+                  <div v-if="errors?.service" style="color: #ff6467">
+                    {{ errors?.service }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                Комментарий
+                <UTextarea
+                  id="comment"
+                  v-model="comment"
+                  v-bind="commentAttrs"
+                  name="comment"
+                  size="xl"
+                  placeholder="расскажите о ваших требованиях.."
+                />
+              </div>
+
+              <div>
+                <UButton
+                  size="xl"
+                  class="flex place-content-center w-full"
+                  label="Отправить заявку"
+                  type="submit"
+                  :disabled="errors && Object.keys(errors).length > 0"
                 />
               </div>
             </div>
-
-            <div class="flex flex-col gap-2">
-              Комментарий
-              <UTextarea
-                size="xl"
-                placeholder="расскажите о ваших требованиях.."
-              />
-            </div>
-
-            <div>
-              <UButton
-                size="xl"
-                class="flex place-content-center w-full"
-                label="Отправить заявку"
-              />
-            </div>
-          </div>
+          </form>
         </UCard>
       </div>
     </template>
   </UPageSection>
+
+  <UButton label="pizda" @click="pizda()" />
 </template>
 
-<script setup>
+<script setup lang="ts">
+const toast = useToast()
+
 const contacts = [
   {
     label: 'Телефон',
@@ -124,6 +161,53 @@ const services = [
   'продажа недвижимости',
   'аренда недвижимости',
 ]
+
+const { errors, handleSubmit, defineField } = useForm({
+  initialValues: {
+    name: '',
+    phone: '',
+    service: '',
+    comment: '',
+  },
+  validationSchema: {
+    name(value: string) {
+      if (!value)
+        return 'Укажите имя'
+      if (value.trim().length < 2)
+        return 'Минимум 2 символа'
+      if (/\d/.test(value)) {
+        return 'Укажите корректное имя'
+      }
+      return true
+    },
+    phone(value: string) {
+      if (!value)
+        return 'Укажите телефон'
+      const digits = (value || '').replace(/\D/g, '')
+      if (digits.length < 11)
+        return 'Введите корректный телефон'
+      return true
+    },
+    service(value: string) {
+      if (!value)
+        return 'Укажите услугу'
+      return true
+    },
+  },
+})
+
+const [name, nameAttrs] = defineField('name')
+const [phone, phoneAttrs] = defineField('phone')
+const [service, serviceAttrs] = defineField('service')
+const [comment, commentAttrs] = defineField('comment')
+
+const onSubmit = handleSubmit((values) => {
+  console.log('onSubmit', values)
+
+  toast.add({
+    title: 'Заявка успешно отправлена, мы скоро с вами свяжемся !',
+  })
+})
 </script>
 
 <style lang="scss">

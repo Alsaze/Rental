@@ -43,7 +43,7 @@
         </div>
 
         <UCard variant="subtle" class="w-full" :ui="{ root: 'max-w-[500px]' }">
-          <form name="contacts" netlify @submit.prevent="onSubmit">
+          <form name="contacts" method="POST" netlify @submit.prevent="onSubmit">
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
                 Как к вам обращаться

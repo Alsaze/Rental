@@ -2,14 +2,16 @@
   <!--  Mobile -->
   <div v-if="isMobile" class="gallery-mobile">
     <Swiper
-      :pagination="true"
+      :pagination="{
+        dynamicBullets: true,
+      }"
       :loop="true"
       :modules="modules"
       class="mySwiper gallery-mobile__swiper"
       @double-click="openAllImages = true"
     >
       <SwiperSlide
-        v-for="image in smallImages"
+        v-for="image in images"
         :key="image?.src"
       >
         <img width="100%" :src="image?.src" :alt="image?.src">

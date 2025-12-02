@@ -1,19 +1,19 @@
 <template>
-  <div id="variations">
+  <div id="variations" class="main-carusel">
+    <h2>Актуальные варианты</h2>
+
     <UCarousel
       v-slot="{ item }"
       arrows
       :items="previewItems"
       :ui="{ item: 'basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6' }"
-      class="w-full variant"
+      class="w-full"
     >
-      <NuxtLink :to="`/post/${item.id}`">
-        <img
-          :src="item?.previewImage?.src"
-          :alt="item?.previewImage?.src"
-          class="rounded-lg w-full h-auto object-cover"
-        >
-      </NuxtLink>
+      <div class="variants">
+        <NuxtLink :to="`/post/${item.id}`">
+          <img :src="item?.previewImage?.src" :alt="item?.previewImage?.src">
+        </NuxtLink>
+      </div>
     </UCarousel>
   </div>
 </template>
@@ -29,8 +29,22 @@ interface PreviewItem {
 defineProps<{ previewItems: PreviewItem[] }>()
 </script>
 
-<style lang="scss">
-.variant {
+<style scoped lang="scss">
+.main-carusel {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.variants {
   cursor: pointer;
+  height: 100%;
+
+  img {
+    border-radius: 12px;
+    height: 300px;
+    object-fit: cover;
+  }
 }
 </style>

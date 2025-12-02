@@ -24,7 +24,7 @@
       </template>
     </UPageHero>
 
-    <UContainer class="flex flex-col gap-32 mt-32">
+    <UContainer class="flex flex-col gap-12 mt-12">
       <MainServices :services="services" />
 
       <MainCarusel :preview-items="previewItems" />

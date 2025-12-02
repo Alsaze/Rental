@@ -44,6 +44,8 @@
 
         <UCard variant="subtle" class="w-full" :ui="{ root: 'max-w-[500px]' }">
           <form name="contacts" method="POST" netlify @submit.prevent="onSubmit">
+            <input type="hidden" name="form-name" value="contacts">
+
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
                 Как к вам обращаться
@@ -198,11 +200,20 @@ const [phone, phoneAttrs] = defineField('phone')
 const [service, serviceAttrs] = defineField('service')
 const [comment, commentAttrs] = defineField('comment')
 
-const onSubmit = handleSubmit((values) => {
-  console.log('onSubmit', values)
+const onSubmit = handleSubmit(async (values) => {
+  const payload = new FormData()
+  payload.append('form-name', 'contacts')
+  Object.entries(values).forEach(([key, value]) => {
+    payload.append(key, value as any)
+  })
+
+  await fetch('/', {
+    method: 'POST',
+    body: payload,
+  })
 
   toast.add({
-    title: 'Заявка успешно отправлена, мы скоро с вами свяжемся !',
+    title: 'Заявка успешно отправлена!',
   })
 })
 </script>

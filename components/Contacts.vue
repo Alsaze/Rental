@@ -55,7 +55,6 @@
                   placeholder="Имя"
                   size="xl"
                   class="w-full"
-                  autofocus
                 />
 
                 <div v-if="errors?.name" style="color: #ff6467">
@@ -128,8 +127,6 @@
       </div>
     </template>
   </UPageSection>
-
-  <UButton label="pizda" @click="pizda()" />
 </template>
 
 <script setup lang="ts">

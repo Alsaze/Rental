@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { createResolver } from '@nuxt/kit'
+import { process } from 'std-env'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -19,7 +20,11 @@ export default defineNuxtConfig({
         autoImports: true,
       },
     ],
+    'vue-yandex-maps/nuxt',
   ],
+  yandexMaps: {
+    apikey: process.env.VITE_YANDEX_MAPS_KEY,
+  },
   css: ['~/assets/css/main.css', '~/assets/scss/main.scss'],
   build: {
     transpile: ['gsap'],

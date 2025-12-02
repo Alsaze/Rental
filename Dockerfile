@@ -12,6 +12,7 @@ COPY --from=build /app/.output/ ./
 
 ENV PORT=80
 ENV VITE_BASE_URL=https://rental.koptilnya.xyz
+VITE_YANDEX_MAPS_KEY=13f4c06b-cb7e-4eeb-81f1-af52f12587b2
 
 EXPOSE 80
 

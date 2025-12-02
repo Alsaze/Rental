@@ -28,6 +28,8 @@
             <p>{{ cart?.description }}</p>
           </div>
 
+          <MapView v-if="cart?.coordinates" :marker="marker" />
+
           <Contacts />
         </div>
       </template>
@@ -42,9 +44,13 @@
       <Gallery :preview-image="cart?.previewImage" :images="cart?.images" />
 
       <div>
-        Описание
+        Описание:
         <p>{{ cart?.description }}</p>
       </div>
+
+      <MapView v-if="cart?.coordinates" :marker="marker" />
+
+      <Contacts />
     </div>
   </UContainer>
 </template>
@@ -66,6 +72,10 @@ const route = useRoute()
 
 const { cartById } = useMock()
 const cart = cartById(route.params.id)
+const marker = computed(() => ({
+  coordinates: cart?.coordinates ?? [0, 0],
+  subtitle: cart?.address,
+}))
 
 const { lengthY } = useSwipe(
   target,

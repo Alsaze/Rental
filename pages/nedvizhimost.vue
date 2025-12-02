@@ -87,7 +87,7 @@ const services = [
 ]
 
 const { cartByCategory } = useMock()
-const previewItems = computed(() => cartByCategory('transport'))
+const previewItems = computed(() => cartByCategory('nedvizhimost'))
 </script>
 
 <style lang="scss">

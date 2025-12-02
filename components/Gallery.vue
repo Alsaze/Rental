@@ -1,10 +1,12 @@
 <template>
+  <!--  Mobile -->
   <div v-if="isMobile" class="gallery-mobile">
     <Swiper
       :pagination="true"
       :loop="true"
       :modules="modules"
       class="mySwiper gallery-mobile__swiper"
+      @double-click="openAllImages = true"
     >
       <SwiperSlide
         v-for="image in smallImages"
@@ -15,9 +17,14 @@
     </Swiper>
   </div>
 
+  <!--  Desktop -->
   <div v-else class="gallery-desktop">
     <div class="gallery-desktop__main">
-      <img :src="previewImage?.src" :alt="previewImage?.src">
+      <img
+        :src="previewImage?.src"
+        :alt="previewImage?.src"
+        @click="openAllImages = true"
+      >
     </div>
 
     <div class="gallery-desktop__side">
@@ -25,15 +32,34 @@
         v-for="img in smallImages"
         :key="img?.src"
         class="gallery-desktop__small"
+        @click="openAllImages = true"
       >
         <img :src="img?.src" :alt="img?.src">
       </div>
 
-      <UButton size="xl" class="gallery-desktop__button">
+      <UButton
+        size="xl"
+        class="gallery-desktop__button"
+        @click="openAllImages = true"
+      >
         ⋮⋮ Показать все фото
       </UButton>
     </div>
   </div>
+
+  <!--  Mobile Desktop -->
+  <UModal v-model:open="openAllImages" fullscreen title="Просмотр всей галереи">
+    <template #body>
+      <div class="gallery-modal">
+        <div
+          v-for="img in images"
+          :key="img?.src"
+        >
+          <img class="w-full object-cover" :src="img?.src" :alt="img?.src">
+        </div>
+      </div>
+    </template>
+  </UModal>
 </template>
 
 <script setup lang="ts">
@@ -49,6 +75,7 @@ const props = defineProps<{
 }>()
 
 const modules = [Pagination]
+const openAllImages = ref(false)
 
 const isMobile = useMediaQuery('(max-width: 1024px)')
 const smallImages = computed(() => props?.images?.slice(1, 5))
@@ -99,6 +126,16 @@ const smallImages = computed(() => props?.images?.slice(1, 5))
     right: 6px;
     bottom: 6px;
     cursor: pointer;
+  }
+}
+
+.gallery-modal {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  @include mobile {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 </style>

@@ -43,9 +43,7 @@
         </div>
 
         <UCard variant="subtle" class="w-full" :ui="{ root: 'max-w-[500px]' }">
-          <form name="contacts" method="POST" netlify @submit.prevent="onSubmit">
-            <input type="hidden" name="form-name" value="contacts">
-
+          <form name="contacts" method="POST" @submit.prevent="onSubmit">
             <div class="flex flex-col gap-4">
               <div class="flex flex-col gap-2">
                 Как к вам обращаться
@@ -125,13 +123,6 @@
               </div>
             </div>
           </form>
-          <form name="contacts" netlify hidden>
-            <input type="hidden" name="form-name" value="contacts">
-            <input type="text" name="name">
-            <input type="text" name="phone">
-            <input type="text" name="service">
-            <textarea name="comment" />
-          </form>
         </UCard>
       </div>
     </template>
@@ -207,28 +198,17 @@ const [phone, phoneAttrs] = defineField('phone')
 const [service, serviceAttrs] = defineField('service')
 const [comment, commentAttrs] = defineField('comment')
 
-function encode(data: Record<string, string>) {
-  return Object.keys(data)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join('&')
-}
-
 const onSubmit = handleSubmit(async (values) => {
-  await fetch('/', {
+  const res = await $fetch('/api/send_mail', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: encode({
-      'form-name': 'contacts',
-      'name': values.name,
-      'phone': values.phone,
-      'service': values.service,
-      'comment': values.comment,
-    }),
+    body: values,
   })
 
-  toast.add({
-    title: 'Заявка успешно отправлена!',
-  })
+  if (res.ok) {
+    toast.add({
+      title: 'Заявка успешно отправлена!',
+    })
+  }
 })
 </script>
 

@@ -5,7 +5,7 @@ import { process } from 'std-env'
 const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   modules: [
@@ -59,11 +59,5 @@ export default defineNuxtConfig({
   },
   fonts: {
     provider: 'google',
-  },
-  nitro: {
-    preset: 'static',
-  },
-  routeRules: {
-    '/**': { prerender: true },
   },
 })

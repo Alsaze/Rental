@@ -1,29 +1,31 @@
 <template>
   <div class="layout">
-    <UHeader
-      title="Rental"
-      :toggle="false"
-      :ui="{
-        root: 'fixed bg-transparent w-full',
-        left: 'relative flex items-center w-full',
-        container: 'gap-0',
-        right: 'hidden',
-      }"
-    >
-      <template #left>
-        <div class="text-lg">
-          Rental
-        </div>
+    <ClientOnly>
+      <UHeader
+        title="Rental"
+        :toggle="false"
+        :ui="{
+          root: 'fixed bg-transparent w-full',
+          left: 'relative flex items-center w-full',
+          container: 'gap-0',
+          right: 'hidden',
+        }"
+      >
+        <template #left>
+          <div class="text-lg">
+            Rental
+          </div>
 
-        <div class="absolute left-1/2 transform -translate-x-1/2">
-          <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
-        </div>
+          <div class="absolute left-1/2 transform -translate-x-1/2">
+            <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
+          </div>
 
-        <div class="ml-auto">
-          <UButton href="#contacts" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
-        </div>
-      </template>
-    </UHeader>
+          <div class="ml-auto">
+            <UButton href="#contacts" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
+          </div>
+        </template>
+      </UHeader>
+    </ClientOnly>
 
     <UMain>
       <slot />

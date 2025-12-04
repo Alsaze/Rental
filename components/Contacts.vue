@@ -125,6 +125,13 @@
               </div>
             </div>
           </form>
+          <form name="contacts" netlify hidden>
+            <input type="hidden" name="form-name" value="contacts">
+            <input type="text" name="name">
+            <input type="text" name="phone">
+            <input type="text" name="service">
+            <textarea name="comment" />
+          </form>
         </UCard>
       </div>
     </template>
@@ -200,16 +207,23 @@ const [phone, phoneAttrs] = defineField('phone')
 const [service, serviceAttrs] = defineField('service')
 const [comment, commentAttrs] = defineField('comment')
 
-const onSubmit = handleSubmit(async (values) => {
-  const payload = new FormData()
-  payload.append('form-name', 'contacts')
-  Object.entries(values).forEach(([key, value]) => {
-    payload.append(key, value as any)
-  })
+function encode(data: Record<string, string>) {
+  return Object.keys(data)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&')
+}
 
+const onSubmit = handleSubmit(async (values) => {
   await fetch('/', {
     method: 'POST',
-    body: payload,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: encode({
+      'form-name': 'contacts',
+      'name': values.name,
+      'phone': values.phone,
+      'service': values.service,
+      'comment': values.comment,
+    }),
   })
 
   toast.add({

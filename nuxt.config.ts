@@ -60,4 +60,10 @@ export default defineNuxtConfig({
   fonts: {
     provider: 'google',
   },
+  nitro: {
+    preset: 'static',
+  },
+  routeRules: {
+    '/**': { prerender: true },
+  },
 })

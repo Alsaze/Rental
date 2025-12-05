@@ -16,6 +16,8 @@
             Rental
           </div>
 
+          <UColorModeSwitch />
+
           <div class="absolute left-1/2 transform -translate-x-1/2">
             <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
           </div>

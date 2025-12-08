@@ -30,7 +30,11 @@
 
           <MapView v-if="cart?.coordinates" :marker="marker" />
 
+          <MainCarusel title="Похожие варианты" :preview-items="previewItems" />
+
           <Contacts />
+
+          <BaseFooter />
         </div>
       </template>
     </UDrawer>
@@ -43,12 +47,36 @@
 
       <Gallery :preview-image="cart?.previewImage" :images="cart?.images" />
 
-      <div>
-        Описание:
-        <p class="whitespace-pre-line" v-html="cart?.description" />
+      <div ref="descriptionRef" class="post-page__description">
+        <div>
+          Описание:
+          <p class="whitespace-pre-line" v-html="cart?.description" />
+        </div>
+
+        <UCard
+          variant="subtle"
+          class="post-page__action"
+          title="Action"
+        >
+          <div>
+            Хотите узнать больше или оформить бронирование?<br>
+            Напишите нам — мы с удовольствием подскажем всё, что нужно.
+          </div>
+
+          <template #footer>
+            <UButton
+              class="w-full flex justify-center"
+              href="#contacts"
+              size="xl"
+              label="Свяжитесь с нами"
+            />
+          </template>
+        </UCard>
       </div>
 
       <MapView v-if="cart?.coordinates" :marker="marker" />
+
+      <MainCarusel title="Похожие варианты" :preview-items="previewItems" />
 
       <Contacts />
     </div>
@@ -62,6 +90,7 @@ import { computed, shallowRef } from 'vue'
 import Gallery from '~/components/Gallery.vue'
 
 const open = ref(false)
+const descriptionRef = shallowRef<HTMLElement | null>(null)
 const target = shallowRef<HTMLElement | null>(null)
 const targetHeight = computed(() => target.value?.offsetHeight)
 const targetDrawer = shallowRef<HTMLElement | null>(null)
@@ -69,13 +98,16 @@ const targetDrawerHeight = computed(() => targetDrawer.value?.offsetHeight)
 const { y } = useScroll(targetDrawer)
 const isMobile = useMediaQuery('(max-width: 1024px)')
 const route = useRoute()
+const showContactBar = useState('showContactBar')
 
-const { cartById } = useMock()
+const { cartById, cartByCategory } = useMock()
 const cart = cartById(route.params.id)
 const marker = computed(() => ({
   coordinates: cart?.coordinates ?? [0, 0],
   subtitle: cart?.address,
 }))
+
+const previewItems = computed(() => cartByCategory(cart?.category))
 
 const { lengthY } = useSwipe(
   target,
@@ -106,15 +138,38 @@ definePageMeta({
 })
 
 onMounted(() => {
+  const el = descriptionRef.value
+  if (!el)
+    return
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0]
+
+      showContactBar.value = !entry.isIntersecting
+    },
+    {
+      threshold: 0.1,
+    },
+  )
+
+  observer.observe(el)
+
   if (isMobile.value) {
     document.body.style.overflow = 'hidden'
   }
 })
 
 onUnmounted(() => {
+  showContactBar.value = false
+
   if (isMobile.value) {
     document.body.style.overflow = ''
   }
+})
+
+useHead({
+  title: `Rental - ${cart?.title}`,
 })
 </script>
 
@@ -158,6 +213,23 @@ onUnmounted(() => {
       flex-direction: column;
       gap: 16px;
     }
+  }
+
+  &__description {
+    flex-shrink: 1;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  &__action {
+    height: fit-content;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(64px + 26px);
+    width: 300px;
   }
 }
 </style>

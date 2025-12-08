@@ -131,6 +131,7 @@
 
 <script setup lang="ts">
 const toast = useToast()
+const route = useRoute()
 
 const contacts = [
   {
@@ -201,7 +202,10 @@ const [comment, commentAttrs] = defineField('comment')
 const onSubmit = handleSubmit(async (values) => {
   const res = await $fetch('/api/send_mail', {
     method: 'POST',
-    body: values,
+    body: {
+      ...values,
+      route: route.path,
+    },
   })
 
   if (res.ok) {

@@ -36,6 +36,12 @@
   </div>
 </template>
 
+<script setup lang="ts">
+useHead({
+  title: 'Rental - консьерж-сервис',
+})
+</script>
+
 <style lang="scss">
 .index-page {
   display: flex;

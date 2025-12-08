@@ -5,7 +5,7 @@
       :toggle="false"
       :ui="{
         root: 'fixed bg-transparent w-full',
-        left: 'relative flex items-center w-full',
+        left: 'relative flex items-center w-full justify-between',
         container: 'gap-0',
         right: 'hidden',
       }"
@@ -16,6 +16,16 @@
         <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2 text-lg">
           Rental
         </NuxtLink>
+
+        <transition name="fade">
+          <UButton
+            v-if="showContactBar && !isMobile"
+            class="justify-center"
+            href="#contacts"
+            size="xl"
+            label="Свяжитесь с нами"
+          />
+        </transition>
       </template>
     </UHeader>
 
@@ -23,22 +33,21 @@
       <slot />
     </UMain>
 
-    <UFooter class="footer">
-      <div class="flex flex-col md:flex-row items-center text-sm opacity-70">
-        <div>
-          © {{ new Date().getFullYear() }} Rental. Все права защищены.
-        </div>
-      </div>
-    </UFooter>
+    <BaseFooter v-if="!isMobile" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useMediaQuery } from '@vueuse/core'
+import BaseFooter from '~/components/BaseFooter.vue'
+
 const router = useRouter()
 const route = useRoute()
+const isMobile = useMediaQuery('(max-width: 1280px)')
 
 const { cartById } = useMock()
 const cart = cartById(route?.params?.id)
+const showContactBar = useState('showContactBar', () => false)
 
 function routerBack() {
   const newRoute = `/${cart?.category}#variations`
@@ -47,6 +56,15 @@ function routerBack() {
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .footer {
   @include mobile {
     display: none;

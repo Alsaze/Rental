@@ -21,7 +21,8 @@ export default defineEventHandler(async (event) => {
       <b>Имя:</b> ${body.name}<br>
       <b>Телефон:</b> ${body.phone}<br>
       <b>Услуга:</b> ${body.service}<br>
-      <b>Комментарий:</b> ${body.comment}
+      <b>Комментарий:</b> ${body.comment}<br>
+      <b>Route:</b> ${body.route}
     `,
   })
 

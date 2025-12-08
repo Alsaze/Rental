@@ -88,6 +88,10 @@ const services = [
 
 const { cartByCategory } = useMock()
 const previewItems = computed(() => cartByCategory('nedvizhimost'))
+
+useHead({
+  title: 'Rental - недвижимость',
+})
 </script>
 
 <style lang="scss">

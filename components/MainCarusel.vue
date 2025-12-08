@@ -2,11 +2,10 @@
   <div id="variations" class="main-carousel">
     <h2>Актуальные варианты</h2>
 
-    <!--    :autoplay="{ delay: 2000 }" -->
-
     <Swiper
       :modules="[Navigation, Autoplay]"
       :loop="true"
+      :autoplay="{ delay: 2000 }"
       :navigation="true"
       :slides-per-view="1.2"
       :space-between="16"

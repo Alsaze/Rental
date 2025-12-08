@@ -25,7 +25,7 @@
           <p>{{ cart?.title }}</p>
           <div>
             <p>Описание:</p>
-            <p>{{ cart?.description }}</p>
+            <p class="whitespace-pre-line" v-html="cart?.description" />
           </div>
 
           <MapView v-if="cart?.coordinates" :marker="marker" />
@@ -45,7 +45,7 @@
 
       <div>
         Описание:
-        <p>{{ cart?.description }}</p>
+        <p class="whitespace-pre-line" v-html="cart?.description" />
       </div>
 
       <MapView v-if="cart?.coordinates" :marker="marker" />
@@ -124,7 +124,7 @@ onUnmounted(() => {
   margin-top: calc(64px + 26px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 
   @include mobile {
     margin-top: 0;

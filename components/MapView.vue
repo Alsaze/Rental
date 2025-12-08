@@ -1,6 +1,8 @@
 <template>
-  <h2>Где вы будете жить</h2>
-  <p>{{ marker.subtitle }}</p>
+  <div>
+    <h2>Где вы будете жить</h2>
+    <p>{{ marker.subtitle }}</p>
+  </div>
 
   <YandexMap
     :settings="{ location }"

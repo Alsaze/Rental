@@ -25,7 +25,7 @@
               :key="contact.label"
               class="flex items-center gap-4"
             >
-              <div class="bg-gray-800 p-3 rounded-lg">
+              <div class="bg-gray-800 p-4 flex items-center rounded-lg">
                 <UIcon :name="contact.icon" />
               </div>
 

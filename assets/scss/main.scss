@@ -61,3 +61,39 @@ html {
   bottom: 200px !important;
   --swiper-pagination-bullet-size: 8px
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background: #1e293b;
+  border-radius: 50%;
+}
+
+.swiper-navigation-icon{
+  display: none;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  background: white;
+}
+
+/* Левая стрелка */
+.swiper-button-prev::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 18l-6-6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Правая стрелка */
+.swiper-button-next::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+}

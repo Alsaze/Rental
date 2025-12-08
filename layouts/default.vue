@@ -12,11 +12,9 @@
         }"
       >
         <template #left>
-          <div class="text-lg">
+          <NuxtLink to="/" class="text-lg">
             Rental
-          </div>
-
-          <UColorModeSwitch />
+          </NuxtLink>
 
           <div class="absolute left-1/2 transform -translate-x-1/2">
             <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
@@ -128,6 +126,6 @@ watch(() => route?.path, () => {
     return
   }
 
-  activeTab.value = routerPath
+  activeTab.value = routerPath || '/'
 })
 </script>

@@ -1,26 +1,47 @@
 <template>
-  <div id="variations" class="main-carusel">
+  <div id="variations" class="main-carousel">
     <h2>Актуальные варианты</h2>
 
-    <UCarousel
-      v-slot="{ item }"
-      arrows
-      :items="previewItems"
-      :ui="{ item: 'basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6' }"
-      class="w-full"
+    <!--    :autoplay="{ delay: 2000 }" -->
+
+    <Swiper
+      :modules="[Navigation, Autoplay]"
+      :loop="true"
+      :navigation="true"
+      :slides-per-view="1.2"
+      :space-between="16"
+      :breakpoints="{
+        640: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 },
+        1280: { slidesPerView: 5 },
+      }"
     >
-      <div class="variants">
+      <SwiperSlide v-for="item in previewItems" :key="item.id" class="main-carousel__variant">
         <NuxtLink :to="`/post/${item.id}`">
-          <img :src="item?.previewImage?.src" :alt="item?.previewImage?.src">
+          <img :src="item.previewImage.src" :alt="item.shortTitle">
+          <div class="main-carousel__type text-sm ">
+            {{ $t(item.type) }}
+          </div>
+          <p class="text-sm">
+            {{ item.shortTitle }}
+          </p>
         </NuxtLink>
-      </div>
-    </UCarousel>
+      </SwiperSlide>
+    </Swiper>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Autoplay, Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/navigation'
+
 interface PreviewItem {
   id: number
+  shortTitle: string
+  type: string
   previewImage: {
     src: string
   }
@@ -30,21 +51,31 @@ defineProps<{ previewItems: PreviewItem[] }>()
 </script>
 
 <style scoped lang="scss">
-.main-carusel {
-  height: 300px;
+.main-carousel {
+  height: 380px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
 
-.variants {
-  cursor: pointer;
-  height: 100%;
+  &__variant {
+    position: relative;
+    cursor: pointer;
 
-  img {
-    border-radius: 12px;
-    height: 300px;
-    object-fit: cover;
+    img {
+      border-radius: 12px;
+      height: 300px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__type {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    padding: 4px 6px;
+    background: #1e293b;
+    border-radius: 8px;
   }
 }
 </style>

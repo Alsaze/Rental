@@ -26,8 +26,10 @@ export default defineNuxtConfig({
     apikey: process.env.VITE_YANDEX_MAPS_KEY,
   },
   css: ['~/assets/css/main.css', '~/assets/scss/main.scss'],
-  ui: {
-    colorMode: 'dark',
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    classSuffix: '',
   },
   build: {
     transpile: ['gsap'],

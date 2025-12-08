@@ -20,6 +20,7 @@
             <UTabs v-model="activeTab" :size="isMobile ? 'md' : 'xl'" :content="false" :items="tabs" />
           </div>
 
+          <UColorModeButton />
           <div class="ml-auto">
             <UButton href="#contacts" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
           </div>

@@ -33,6 +33,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html.dark,
+[data-theme="dark"] {
+  background-color: #000 !important;
+  color-scheme: dark;
+}
+
 //swiper
 .swiper {
   width: 100%;

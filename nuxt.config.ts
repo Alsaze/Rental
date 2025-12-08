@@ -29,7 +29,9 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
+    storageKey: 'color-mode',
     classSuffix: '',
+    dataValue: 'dark',
   },
   build: {
     transpile: ['gsap'],

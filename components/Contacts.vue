@@ -92,6 +92,7 @@
                     class="w-full"
                     size="xl"
                     placeholder="выберите услугу"
+                    :ui="{ content: 'max-h-70' }"
                   />
 
                   <div v-if="errors?.service" style="color: #ff6467">

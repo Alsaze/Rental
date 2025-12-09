@@ -1,6 +1,11 @@
 <template>
-  <UFooter class="border-t border-gray-200 mt-10">
-    <div class="w-full max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+  <UFooter
+    class="border-t border-gray-200 mt-10"
+    :ui="{
+      center: 'w-full',
+    }"
+  >
+    <div class="w-full py-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
       <div id="footer-contacts">
         <h3 class="font-semibold text-base mb-3">
           Контакты
@@ -48,11 +53,3 @@
     </div>
   </UFooter>
 </template>
-
-<script setup lang="ts">
-
-</script>
-
-<style scoped lang="scss">
-
-</style>

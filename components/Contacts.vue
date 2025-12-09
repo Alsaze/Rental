@@ -93,6 +93,7 @@
                     size="xl"
                     placeholder="выберите услугу"
                     :ui="{ content: 'max-h-70' }"
+                    :overlay="{ scrollLock: false }"
                   />
 
                   <div v-if="errors?.service" style="color: #ff6467">

@@ -12,6 +12,7 @@
           :key="item.title"
           class="how-work"
           :ui="cardUi"
+          variant="subtle"
         >
           <div class="how-work__number">
             {{ item.number }}
@@ -120,7 +121,7 @@ const items = [
 .how-work {
   &__number {
     font-size: 48px;
-    opacity: 0.1;
+    opacity: 0.3;
     font-weight: 600;
   }
 

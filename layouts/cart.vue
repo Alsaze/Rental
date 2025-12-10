@@ -13,7 +13,8 @@
       <template #left>
         <Icon class="cursor-pointer w-6 h-6" name="lucide:arrow-left" @click="routerBack()" />
 
-        <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2 text-lg">
+        <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2 text-lg flex items-center gap-2">
+          <Icon name="my-icon:main-logo" :style="{ fontSize: isMobile ? '34px' : '48px' }" />
           Rental
         </NuxtLink>
 

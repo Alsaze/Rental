@@ -67,4 +67,12 @@ export default defineNuxtConfig({
   fonts: {
     provider: 'google',
   },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'my-icon',
+        dir: './assets/my-icons',
+      },
+    ],
+  },
 })

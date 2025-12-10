@@ -5,7 +5,7 @@
       center: 'w-full',
     }"
   >
-    <div class="w-full py-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+    <div class="w-full py-6 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm">
       <div id="footer-contacts">
         <h3 class="font-semibold text-base mb-3">
           Контакты
@@ -13,8 +13,8 @@
         <ul class="space-y-2 opacity-80">
           <li>
             <span class="font-medium">Телефон:</span><br>
-            <a href="tel:+74951234567" class="hover:opacity-100 opacity-70">
-              +7 (495) 123-45-67
+            <a href="tel:+996700115500" class="hover:opacity-100 opacity-70">
+              +9 (967) 001-15-500
             </a>
           </li>
           <li>
@@ -25,7 +25,33 @@
           </li>
           <li>
             <span class="font-medium">Адрес:</span><br>
-            Москва, Тверская улица, 1
+            <p class="opacity-70">
+              Адрес Бишкек, Свердловский район,
+              ул.Ибраимова, дом 115/4
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div id="footer-contacts">
+        <h3 class="font-semibold text-base mb-3">
+          Реквизиты
+        </h3>
+        <ul class="space-y-2 opacity-80">
+          <li>
+            <p class="opacity-70">
+              Общество с ограниченной ответственностью "АТ Голден"
+            </p>
+          </li>
+          <li>
+            <p class="opacity-70">
+              ИНН 00406202010276
+            </p>
+          </li>
+          <li>
+            <p class="opacity-70">
+              Регистрационный номер 190962-3301-ООО
+            </p>
           </li>
         </ul>
       </div>
@@ -38,6 +64,7 @@
           <li><a href="/" class="hover:opacity-100 opacity-70">Главная</a></li>
           <li><a href="/nedvizhimost" class="hover:opacity-100 opacity-70">Недвижимость</a></li>
           <li><a href="/transport" class="hover:opacity-100 opacity-70">Авто</a></li>
+          <li><a href="/about-us" class="hover:opacity-100 opacity-70">О нас</a></li>
         </ul>
       </div>
 

@@ -12,7 +12,8 @@
         }"
       >
         <template #left>
-          <NuxtLink to="/" class="text-lg">
+          <NuxtLink to="/" class="text-lg flex items-center gap-2">
+            <Icon name="my-icon:main-logo" :style="{ fontSize: isMobile ? '34px' : '48px' }" />
             Rental
           </NuxtLink>
 
@@ -22,7 +23,11 @@
 
           <!--          <UColorModeButton /> -->
           <div class="ml-auto">
-            <UButton href="#contacts" :size="isMobile ? 'md' : 'xl'" label="Связаться" />
+            <UButton
+              :href="route.path.startsWith('/about-us') ? '/' : '#contacts'"
+              :size="isMobile ? 'md' : 'xl'"
+              :label="route.path.startsWith('/about-us') ? 'Вернуться' : 'Связаться'"
+            />
           </div>
         </template>
       </UHeader>

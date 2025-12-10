@@ -169,7 +169,25 @@ onUnmounted(() => {
 })
 
 useHead({
-  title: `Rental - ${cart?.title}`,
+  title: `${cart?.title} — подробная информация и услуги от АТ Голден`,
+  meta: [
+    {
+      name: 'description',
+      content: `${cart?.title} доступен через АТ Голден. ${cart?.description.replace(/<[^>]+(>|$)/g, '').slice(0, 160)}. Полное сопровождение сделки, юридическая проверка и безопасное оформление.`,
+    },
+    {
+      name: 'keywords',
+      content: `${cart?.category}, ${cart?.title}, аренда ${cart?.category}, покупка ${cart?.category}, продажа ${cart?.category}, проверка документов, безопасная сделка, АТ Голден, Кыргызстан, Бишкек, Ош, Джалал-Абад, Каракол, Балыкчы, Талас, Токмак, Узген`,
+    },
+    {
+      property: 'og:title',
+      content: `${cart?.title} — подробная информация и услуги от АТ Голден`,
+    },
+    {
+      property: 'og:description',
+      content: `${cart?.title} доступен через АТ Голден. ${cart?.description.replace(/<[^>]+(>|$)/g, '').slice(0, 160)}. Полное сопровождение сделки, юридическая проверка и безопасное оформление.`,
+    },
+  ],
 })
 </script>
 

@@ -15,6 +15,7 @@ ENV VITE_BASE_URL=https://rental.koptilnya.xyz
 ENV VITE_YANDEX_MAPS_KEY=13f4c06b-cb7e-4eeb-81f1-af52f12587b2
 ENV SMTP_USER=rentalservicekg@yandex.ru
 ENV SMTP_APP_PASSWORD=uljislsoihthciju
+ENV DATABASE_URL="file:./database.db"
 
 
 EXPOSE 80

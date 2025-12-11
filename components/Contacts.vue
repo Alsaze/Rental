@@ -138,7 +138,7 @@ const route = useRoute()
 const contacts = [
   {
     label: 'Телефон',
-    value: '+7 (495) 123-45-67',
+    value: '+9 (967) 001-15-500',
     icon: 'i-lucide:phone',
   },
   {
@@ -148,7 +148,7 @@ const contacts = [
   },
   {
     label: 'Адрес',
-    value: 'Москва, Тверская улица, 1',
+    value: 'Адрес Бишкек, Свердловский район ул.Ибраимова, дом 115/4',
     icon: 'i-lucide:map-pin',
   },
 ]

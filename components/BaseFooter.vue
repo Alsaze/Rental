@@ -19,8 +19,8 @@
           </li>
           <li>
             <span class="font-medium">Email:</span><br>
-            <a href="mailto:info@rental-concierge.com" class="hover:opacity-100 opacity-70">
-              info@rental-concierge.com
+            <a href="mailto:atgoldenkg@gmail.com" class="hover:opacity-100 opacity-70">
+              atgoldenkg@gmail.com
             </a>
           </li>
           <li>
@@ -70,10 +70,10 @@
 
       <div class="md:text-right opacity-70 flex flex-col justify-between">
         <div class="text-lg font-bold">
-          Rental
+          AT Golden
         </div>
         <div class="mt-4 md:mt-0">
-          © {{ new Date().getFullYear() }} Rental.
+          © {{ new Date().getFullYear() }} AT Golden.
           Все права защищены.
         </div>
       </div>

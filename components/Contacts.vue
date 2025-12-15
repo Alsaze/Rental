@@ -11,7 +11,7 @@
           </div>
 
           <div class="text-2xl font-semibold">
-            Начните работу с Rental
+            Начните работу с AT Golden
           </div>
 
           <div class="text-base text-gray-300 mt-2">
@@ -143,7 +143,7 @@ const contacts = [
   },
   {
     label: 'Email',
-    value: 'info@rental-concierge.com',
+    value: 'atgoldenkg@gmail.com',
     icon: 'i-lucide:mail',
   },
   {

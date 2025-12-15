@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <UHeader
-      title="Rental"
+      title="AT Golden"
       :toggle="false"
       :ui="{
         root: 'fixed bg-transparent w-full',
@@ -15,7 +15,7 @@
 
         <NuxtLink to="/" class="absolute left-1/2 transform -translate-x-1/2 text-lg flex items-center gap-2">
           <Icon name="my-icon:main-logo" :style="{ fontSize: isMobile ? '34px' : '48px' }" />
-          Rental
+          AT Golden
         </NuxtLink>
 
         <transition name="fade">
